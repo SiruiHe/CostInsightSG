@@ -2,8 +2,6 @@
   <div class="px-5 py-3">
     <div class="flex flex-wrap justify-between items-end gap-y-2 gap-x-4">
       <div class="flex items-start">
-        <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">$1,482</div>
-        <div class="text-sm font-medium text-red-700 px-1.5 bg-red-500/20 rounded-full">-22%</div>
       </div>
       <div class="grow mb-1">
         <ul ref="legend" class="flex flex-wrap gap-x-4 sm:justify-end"></ul>
@@ -55,11 +53,11 @@ export default {
             y: {
               border: {
                 display: false,
-              },              
-              beginAtZero: true,
+              },
+              beginAtZero: false,
               ticks: {
-                maxTicksLimit: 5,
-                callback: (value) => formatValue(value),
+                maxTicksLimit: 10,
+                // callback: (value) => formatValue(value),
                 color: darkMode.value ? textColor.dark : textColor.light,
               },
               grid: {
@@ -69,10 +67,10 @@ export default {
             x: {
               type: 'time',
               time: {
-                parser: 'MM-DD-YYYY',
-                unit: 'month',
+                parser: 'YYYY',
+                unit: 'year',
                 displayFormats: {
-                  month: 'MMM YY',
+                  month: 'YYYY',
                 },
               },
               border: {
@@ -95,7 +93,7 @@ export default {
             tooltip: {
               callbacks: {
                 title: () => false, // Disable tooltip title
-                label: (context) => formatValue(context.parsed.y),
+                // label: (context) => formatValue(context.parsed.y),
               },
               bodyColor: darkMode.value ? tooltipBodyColor.dark : tooltipBodyColor.light,
               backgroundColor: darkMode.value ? tooltipBgColor.dark : tooltipBgColor.light,
@@ -120,7 +118,7 @@ export default {
             }
             // Reuse the built-in legendItems generator
             const items = c.options.plugins.legend.labels.generateLabels(c)
-            items.slice(0, 2).forEach((item) => {
+            items.slice(0, 3).forEach((item) => {
               const li = document.createElement('li')
               // Button element
               const button = document.createElement('button')
@@ -159,6 +157,16 @@ export default {
     })
 
     onUnmounted(() => chart.destroy())
+
+    watch(
+      () => props.data,
+      (newData) => {
+        if (chart) {
+          chart.data = newData
+          chart.update()
+        }
+      }
+    )
 
     watch(
       () => darkMode.value,

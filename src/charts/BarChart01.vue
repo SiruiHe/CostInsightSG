@@ -53,8 +53,8 @@ export default {
                 display: false,
               },
               ticks: {
-                maxTicksLimit: 5,
-                callback: (value) => formatValue(value),
+                maxTicksLimit: 10,
+                // callback: (value) => formatValue(value),
                 color: darkMode.value ? textColor.dark : textColor.light,
               },
               grid: {
@@ -64,10 +64,10 @@ export default {
             x: {
               type: 'time',
               time: {
-                parser: 'MM-DD-YYYY',
-                unit: 'month',
+                parser: 'YYYY',
+                unit: 'year',
                 displayFormats: {
-                  month: 'MMM YY',
+                  month: 'YYYY',
                 },
               },
               border: {
@@ -88,7 +88,7 @@ export default {
             tooltip: {
               callbacks: {
                 title: () => false, // Disable tooltip title
-                label: (context) => formatValue(context.parsed.y),
+                // label: (context) => formatValue(context.parsed.y),
               },
               bodyColor: darkMode.value ? tooltipBodyColor.dark : tooltipBodyColor.light,
               backgroundColor: darkMode.value ? tooltipBgColor.dark : tooltipBgColor.light,
@@ -153,7 +153,7 @@ export default {
               label.style.fontSize = '14px'
               label.style.lineHeight = 'calc(1.25 / 0.875)'
               const theValue = c.data.datasets[item.datasetIndex].data.reduce((a, b) => a + b, 0)
-              const valueText = document.createTextNode(formatValue(theValue))
+              const valueText = document.createTextNode(formatValue(theValue/props.data.labels.length))
               const labelText = document.createTextNode(item.text)
               value.appendChild(valueText)
               label.appendChild(labelText)

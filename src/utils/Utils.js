@@ -1,7 +1,7 @@
 export const formatValue = (value) => Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumSignificantDigits: 3,
+  // style: 'currency',
+  // currency: 'USD',
+  maximumSignificantDigits: 4,
   notation: 'compact',
 }).format(value);
 
