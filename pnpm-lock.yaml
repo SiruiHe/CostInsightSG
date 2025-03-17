@@ -32,6 +32,9 @@ importers:
       vue:
         specifier: ^3.2.20
         version: 3.5.13
+      vue-awesome-paginate:
+        specifier: ^1.2.0
+        version: 1.2.0
       vue-flatpickr-component:
         specifier: ^11.0.3
         version: 11.0.5(vue@3.5.13)
@@ -751,6 +754,9 @@ packages:
       yaml:
         optional: true
 
+  vue-awesome-paginate@1.2.0:
+    resolution: {integrity: sha512-+eYXo666E2n8NhpEPIdJcQEoJBDLo7wMGv45D2+i/VDntz2o422jRNcMQ7VESMgAcKyReWMwb9m99esCjsO/hw==}
+
   vue-flatpickr-component@11.0.5:
     resolution: {integrity: sha512-Vfwg5uVU+sanKkkLzUGC5BUlWd5wlqAMq/UpQ6lI2BCZq0DDrXhOMX7hrevt8bEgglIq2QUv0K2Nl84Me/VnlA==}
     engines: {node: '>=14.13.0'}
@@ -1327,6 +1333,12 @@ snapshots:
       fsevents: 2.3.3
       jiti: 2.4.2
       lightningcss: 1.29.1
+
+  vue-awesome-paginate@1.2.0:
+    dependencies:
+      vue: 3.5.13
+    transitivePeerDependencies:
+      - typescript
 
   vue-flatpickr-component@11.0.5(vue@3.5.13):
     dependencies:

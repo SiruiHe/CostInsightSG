@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from './pages/Dashboard.vue'
 import DashboardCard04Vue from './partials/dashboard/DashboardCard04.vue'
+import DashboardCard07Vue from './partials/dashboard/DashboardCard07.vue'
 import DashboardCard08Vue from './partials/dashboard/DashboardCard08.vue'
 
 const routerHistory = createWebHistory()
@@ -19,6 +20,10 @@ const router = createRouter({
       {
         path: "analytics",
         component: DashboardCard04Vue
+      },
+      {
+        path: "table",
+        component: DashboardCard07Vue
       }
     ]
     },
