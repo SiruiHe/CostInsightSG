@@ -18,7 +18,7 @@
 
 <script>
   import axios from 'axios';
-  import LineChart from '../../charts/LineChart02.vue'
+  import LineChart from '../../charts/LineChart.vue'
 
   // Import utilities
   import { getCssVariable } from '../../utils/Utils'

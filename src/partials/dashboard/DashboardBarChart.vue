@@ -11,7 +11,7 @@
 
 <script>
   import axios from 'axios';
-  import BarChart from '../../charts/BarChart01.vue'
+  import BarChart from '../../charts/BarChart.vue'
 
   // Import utilities
   import { getCssVariable } from '../../utils/Utils'

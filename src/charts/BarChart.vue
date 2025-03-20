@@ -1,5 +1,10 @@
 <template>
-  <canvas ref="canvas" :data="data" :width="width" :height="height"></canvas>
+  <div class="px-5 py-3">
+    <ul ref="legend" class="flex flex-wrap gap-x-4"></ul>
+  </div>
+  <div class="grow">
+    <canvas ref="canvas" :data="data" :width="width" :height="height"></canvas>
+  </div>
 </template>
 
 <script>
@@ -18,11 +23,12 @@ import { formatValue } from '../utils/Utils'
 Chart.register(BarController, BarElement, LinearScale, TimeScale, Tooltip, Legend)
 
 export default {
-  name: 'BarChart02',
+  name: 'BarChart01',
   props: ['data', 'width', 'height'],
   setup(props) {
 
     const canvas = ref(null)
+    const legend = ref(null)
     let chart = null
     const darkMode = useDark()
     const { textColor, gridColor, tooltipBodyColor, tooltipBgColor, tooltipBorderColor } = getChartColors()
@@ -43,28 +49,25 @@ export default {
           },
           scales: {
             y: {
-              stacked: true,
               border: {
                 display: false,
               },
-              beginAtZero: true,
               ticks: {
-                maxTicksLimit: 5,
-                callback: (value) => formatValue(value),
+                maxTicksLimit: 10,
+                // callback: (value) => formatValue(value),
                 color: darkMode.value ? textColor.dark : textColor.light,
               },
               grid: {
                 color: darkMode.value ? gridColor.dark : gridColor.light,
-              },              
+              },
             },
             x: {
-              stacked: true,
               type: 'time',
               time: {
-                parser: 'MM-DD-YYYY',
-                unit: 'month',
+                parser: 'YYYY',
+                unit: 'year',
                 displayFormats: {
-                  month: 'MMM YY',
+                  month: 'YYYY',
                 },
               },
               border: {
@@ -74,8 +77,6 @@ export default {
                 display: false,
               },
               ticks: {
-                autoSkipPadding: 48,
-                maxRotation: 0,
                 color: darkMode.value ? textColor.dark : textColor.light,
               },
             },
@@ -87,7 +88,7 @@ export default {
             tooltip: {
               callbacks: {
                 title: () => false, // Disable tooltip title
-                label: (context) => formatValue(context.parsed.y),
+                // label: (context) => formatValue(context.parsed.y),
               },
               bodyColor: darkMode.value ? tooltipBodyColor.dark : tooltipBodyColor.light,
               backgroundColor: darkMode.value ? tooltipBgColor.dark : tooltipBgColor.light,
@@ -99,11 +100,72 @@ export default {
             mode: 'nearest',
           },
           animation: {
-            duration: 200,
+            duration: 500,
           },
           maintainAspectRatio: false,
           resizeDelay: 200,
         },
+        plugins: [{
+          id: 'htmlLegend',
+          afterUpdate(c, args, options) {
+            const ul = legend.value
+            if (!ul) return
+            // Remove old legend items
+            while (ul.firstChild) {
+              ul.firstChild.remove()
+            }
+            // Reuse the built-in legendItems generator
+            const items = c.options.plugins.legend.labels.generateLabels(c)
+            items.forEach((item) => {
+              const li = document.createElement('li')
+              // Button element
+              const button = document.createElement('button')
+              button.style.display = 'inline-flex'
+              button.style.alignItems = 'center'
+              button.style.opacity = item.hidden ? '.3' : ''
+              button.onclick = () => {
+                c.setDatasetVisibility(item.datasetIndex, !c.isDatasetVisible(item.datasetIndex))
+                c.update()
+              }
+              // Color box
+              const box = document.createElement('span')
+              box.style.display = 'block'
+              box.style.width = '12px'
+              box.style.height = '12px'
+              box.style.borderRadius = 'calc(infinity * 1px)'
+              box.style.marginRight = '8px'
+              box.style.borderWidth = '3px'
+              box.style.borderColor = item.fillStyle
+              box.style.pointerEvents = 'none'
+              // Label
+              const labelContainer = document.createElement('span')
+              labelContainer.style.display = 'flex'
+              labelContainer.style.alignItems = 'center'
+              const value = document.createElement('span')
+              value.classList.add('text-gray-800', 'dark:text-gray-100')
+              value.style.fontSize = '30px'
+              value.style.lineHeight = 'calc(2.25 / 1.875)'
+              value.style.fontWeight = '700'
+              value.style.marginRight = '8px'
+              value.style.pointerEvents = 'none'
+              const label = document.createElement('span')
+              label.classList.add('text-gray-500', 'dark:text-gray-400')
+              label.style.fontSize = '14px'
+              label.style.lineHeight = 'calc(1.25 / 0.875)'
+              const theValue = c.data.datasets[item.datasetIndex].data.reduce((a, b) => a + b, 0)
+              const valueText = document.createTextNode(formatValue(theValue/props.data.labels.length))
+              const labelText = document.createTextNode(item.text)
+              value.appendChild(valueText)
+              label.appendChild(labelText)
+              li.appendChild(button)
+              button.appendChild(box)
+              button.appendChild(labelContainer)
+              labelContainer.appendChild(value)
+              labelContainer.appendChild(label)
+              ul.appendChild(li)
+            })
+          },
+        }],
       })
     })
 
@@ -132,6 +194,7 @@ export default {
 
     return {
       canvas,
+      legend,
     }
   }
 }
