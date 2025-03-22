@@ -9,7 +9,7 @@
       </template>
       <template #next-button>
         <span style="overflow:hidden;">
-          <sapn class="arrow-icon" :class="[this.currentPage == this.pages ? 'disable' : '']">></sapn>
+          <span class="arrow-icon" :class="[this.currentPage == this.pages ? 'disable' : '']">></span>
         </span>
       </template>
     </vue-awesome-paginate>

@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from './pages/Dashboard.vue'
-import Home from './pages/Home.vue'
-import DashboardCard04Vue from './partials/dashboard/DashboardCard04.vue'
-import DashboardCard07Vue from './partials/dashboard/DashboardCard07.vue'
-import DashboardCard08Vue from './partials/dashboard/DashboardCard08.vue'
+
+import HomePage from './pages/HomePage.vue'
+import DashboardBarChartVue from './partials/dashboard/DashboardBarChart.vue'
+import DashboardTableVue from './partials/dashboard/DashboardTable.vue'
+import DashboadLineChartVue from './partials/dashboard/DashboadLineChart.vue'
+
 
 const routerHistory = createWebHistory()
 
@@ -18,19 +20,19 @@ const router = createRouter({
       path: '/dashboard',
       component: Dashboard,
       children: [
-        {
-          path: "",
-          component: DashboardCard08Vue,
-        },
-        {
-          path: "analytics",
-          component: DashboardCard04Vue
-        },
-        {
-          path: "table",
-          component: DashboardCard07Vue
-        }
-      ]
+      {
+        path: "CPIbyIncomeGroup",
+        component: DashboadLineChartVue,
+      },
+      {
+        path: "CPIvsIncome",
+        component: DashboardBarChartVue
+      },
+      {
+        path: "CPITable",
+        component: DashboardTableVue
+      }
+    ]
     },
   ]
 })
