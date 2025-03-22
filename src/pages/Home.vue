@@ -39,11 +39,9 @@
                     </div>
                     
                     <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:col-span-6 lg:flex lg:items-center">
-                      <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
-                        <div class="relative block w-full bg-slate-50 dark:bg-slate-800/25 rounded-lg overflow-hidden">
-                          <div class="w-full h-80 flex items-center justify-center">
-                            <span class="text-slate-400 dark:text-slate-500 text-sm font-medium">Future Logo here :)</span>
-                          </div>
+                      <div class="relative mx-auto w-full lg:max-w-md">
+                        <div class="w-full h-80 flex items-center justify-center">
+                          <img src="../images/CostInsightSG_logo.png" alt="CostInsightSG Logo" class="w-64 h-64 object-contain">
                         </div>
                       </div>
                     </div>
