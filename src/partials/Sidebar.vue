@@ -17,9 +17,7 @@
         </button>
         <!-- Logo -->
         <router-link class="block" to="/">
-          <svg class="fill-violet-500" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-            <path d="M31.956 14.8C31.372 6.92 25.08.628 17.2.044V5.76a9.04 9.04 0 0 0 9.04 9.04h5.716ZM14.8 26.24v5.716C6.92 31.372.63 25.08.044 17.2H5.76a9.04 9.04 0 0 1 9.04 9.04Zm11.44-9.04h5.716c-.584 7.88-6.876 14.172-14.756 14.756V26.24a9.04 9.04 0 0 1 9.04-9.04ZM.044 14.8C.63 6.92 6.92.628 14.8.044V5.76a9.04 9.04 0 0 1-9.04 9.04H.044Z" />
-          </svg>
+          <img src="../images/CostInsightSG_logo.png" alt="CostInsightSG Logo" class="w-20 h-20 object-contain">
         </router-link>
       </div>
 
@@ -96,6 +94,25 @@
               </div>
             </SidebarLinkGroup>
           </ul>
+        </div>
+      </div>
+
+      <!-- Ads Section -->
+      <div class="pt-3 mt-auto">
+        <div class="px-3 py-2">
+          <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-3">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Sponsored</h3>
+              <span class="text-xs text-slate-400 dark:text-slate-500">Ad</span>
+            </div>
+            <div class="text-sm text-slate-600 dark:text-slate-300">
+              <p class="font-medium">Ad here</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Anyone wanna put their ads here?</p>
+            </div>
+            <button class="mt-3 w-full text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+              Learn More →
+            </button>
+          </div>
         </div>
       </div>
 
@@ -190,6 +207,15 @@
         sidebarExpanded,
         currentRoute
       }
-    },
-  }
-</script>s
+    })
+
+    return {
+      trigger,
+      sidebar,
+      sidebarExpanded,
+      currentRoute
+    }
+  },
+}
+</script>
+
