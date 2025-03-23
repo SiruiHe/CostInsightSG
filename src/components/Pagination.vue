@@ -40,6 +40,12 @@ export default {
     this.pages = Math.ceil(this.total / this.pageSize)
     this.changePage()
   },
+  watch: {
+    total(newV, _oldV) {
+      this.pages = Math.ceil(this.total / this.pageSize)
+      this.currentPage = 1;
+    },
+  },
   methods: {
     changePage() {
       let startIndex = (this.currentPage - 1) * this.pageSize
