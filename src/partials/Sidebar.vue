@@ -83,32 +83,35 @@
       </div>
 
       <!-- Expand / collapse button -->
-      <div class="hidden lg:inline-flex 2xl:hidden justify-end mt-auto">
-        <div class="w-12 pl-4 pr-3 py-2">
-          <button class="cursor-pointer text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400" @click.prevent="sidebarExpanded = !sidebarExpanded">
-            <span class="sr-only">Expand / collapse sidebar</span>
-            <svg class="shrink-0 fill-current text-gray-400 dark:text-gray-500 sidebar-expanded:rotate-180" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-              <path d="M15 16a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1ZM8.586 7H1a1 1 0 1 0 0 2h7.586l-2.793 2.793a1 1 0 1 0 1.414 1.414l4.5-4.5A.997.997 0 0 0 12 8.01M11.924 7.617a.997.997 0 0 0-.217-.324l-4.5-4.5a1 1 0 0 0-1.414 1.414L8.586 7M12 7.99a.996.996 0 0 0-.076-.373Z" />
-            </svg>
-          </button>
+      <div class="flex mt-auto flex-col">
+        <div class="hidden lg:inline-flex 2xl:hidden justify-end">
+          <div class="w-12 pl-4 pr-3 py-2">
+            <button class="cursor-pointer text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400" @click.prevent="sidebarExpanded = !sidebarExpanded">
+              <span class="sr-only">Expand / collapse sidebar</span>
+              <svg class="shrink-0 fill-current text-gray-400 dark:text-gray-500 sidebar-expanded:rotate-180" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <path d="M15 16a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1ZM8.586 7H1a1 1 0 1 0 0 2h7.586l-2.793 2.793a1 1 0 1 0 1.414 1.414l4.5-4.5A.997.997 0 0 0 12 8.01M11.924 7.617a.997.997 0 0 0-.217-.324l-4.5-4.5a1 1 0 0 0-1.414 1.414L8.586 7M12 7.99a.996.996 0 0 0-.076-.373Z" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Ads Section -->
-      <div class="px-3 py-2 2xl:mt-auto 2xl:block" :class="!sidebarExpanded? 'hidden' : ''">
-        <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-3">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Sponsored</h3>
-            <span class="text-xs text-slate-400 dark:text-slate-500">Ad</span>
+        <!-- Ads Section -->
+        <div class="px-3 py-2" :class="!sidebarExpanded? 'hidden' : ''">
+          <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-3">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Sponsored</h3>
+              <span class="text-xs text-slate-400 dark:text-slate-500">Ad</span>
+            </div>
+            <div class="text-sm text-slate-600 dark:text-slate-300">
+              <p class="font-medium">Ad here</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Anyone wanna put their ads here?</p>
+            </div>
+            <button class="mt-3 w-full text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
+              Learn More →
+            </button>
           </div>
-          <div class="text-sm text-slate-600 dark:text-slate-300">
-            <p class="font-medium">Ad here</p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Anyone wanna put their ads here?</p>
-          </div>
-          <button class="mt-3 w-full text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-            Learn More →
-          </button>
         </div>
+
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@
     <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
 
     <!-- Content area -->
-    <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+    <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
       
       <!-- Site header -->
       <Header :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
