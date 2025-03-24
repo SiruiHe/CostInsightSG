@@ -190,7 +190,7 @@ export default {
     const sidebar = ref(null)
 
     const storedSidebarExpanded = localStorage.getItem('sidebar-expanded')
-    const sidebarExpanded = ref(storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true')
+    const sidebarExpanded = ref(storedSidebarExpanded === null ? true : storedSidebarExpanded === 'true')
 
     const router = useRouter();
     const currentRoute = ref(router.currentRoute.value);
