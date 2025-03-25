@@ -163,7 +163,7 @@
                 </RouterLink>
 
                 <!-- Data Table Card -->
-                <RouterLink to="/dashboard/table" class="transform hover:scale-105 transition-transform duration-200">
+                <RouterLink to="/dashboard/CPIvsIncome" class="transform hover:scale-105 transition-transform duration-200">
                   <div class="bg-slate-50 dark:bg-slate-800/25 overflow-hidden shadow rounded-lg">
                     <div class="p-5">
                       <div class="flex items-center">
