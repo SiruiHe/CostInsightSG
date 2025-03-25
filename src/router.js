@@ -19,6 +19,7 @@ const router = createRouter({
     {
       path: '/dashboard',
       component: Dashboard,
+      redirect: '/dashboard/CPIbyIncomeGroup',
       children: [
       {
         path: "CPIbyIncomeGroup",

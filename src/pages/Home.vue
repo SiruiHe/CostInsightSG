@@ -12,12 +12,11 @@
           <!-- Hero Section -->
           <div class="relative overflow-hidden bg-white dark:bg-slate-900">
             <div class="max-w-7xl mx-auto">
-              <div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
+              <div class="relative z-10 pb-8 sm:pb-10 md:pb-10 lg:pb-22 xl:pb-28">
                 <div class="mt-10 mx-auto max-w-7xl">
                   <div class="lg:grid lg:grid-cols-12 lg:gap-8">
                     <!-- Text Content -->
-                    <div class="px-4 sm:px-6 sm:text-center lg:col-span-6 lg:text-left lg:flex lg:items-center">
-                      <div>
+                    <div class="flex flex-col px-4 sm:px-6 sm:text-center lg:col-span-8 lg:text-left">
                         <h1 class="text-4xl tracking-tight font-extrabold text-slate-800 dark:text-slate-100 sm:text-5xl md:text-6xl">
                           <span class="block">Welcome to</span>
                           <span class="block text-indigo-600 dark:text-indigo-400">CostInsightSG</span>
@@ -35,10 +34,9 @@
                             </RouterLink>
                           </div>
                         </div>
-                      </div>
                     </div>
                     
-                    <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:col-span-6 lg:flex lg:items-center">
+                    <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:col-span-4 lg:flex lg:items-center">
                       <div class="relative mx-auto w-full lg:max-w-md">
                         <div class="w-full h-80 flex items-center justify-center">
                           <img src="../images/CostInsightSG_logo.png" alt="CostInsightSG Logo" class="w-64 h-64 object-contain">
@@ -142,7 +140,7 @@
                 </RouterLink>
 
                 <!-- Analytics Card -->
-                <RouterLink to="/dashboard/analytics" class="transform hover:scale-105 transition-transform duration-200">
+                <RouterLink to="/dashboard/CPIvsIncome" class="transform hover:scale-105 transition-transform duration-200">
                   <div class="bg-slate-50 dark:bg-slate-800/25 overflow-hidden shadow rounded-lg">
                     <div class="p-5">
                       <div class="flex items-center">
