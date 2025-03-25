@@ -6,7 +6,7 @@
 
     <!-- Content area -->
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
-      
+
       <!-- Site header -->
       <Header :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
 
@@ -33,7 +33,7 @@
         </div>
       </main>
 
-    </div> 
+    </div>
 
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
 
     return {
       sidebarOpen,
-    }  
+    }
   }
 }
 </script>
