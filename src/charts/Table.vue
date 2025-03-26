@@ -8,9 +8,9 @@
             <th v-for="(value, idx) in headers" scope="col" class="p-3 font-semibold" :key="value" :class="`${idx == this.greenYear ? 'text-green-500': ''} ${getWidth(idx)}`">
               <div class="flex" :class="`${idx == 0 ? '': 'justify-center'}`">
                 {{ value }}
-                <img v-if="sortStatus[idx] == 0" :src="OriginSVG" @click="changeSortStatus(idx)">
-                <img v-else-if="sortStatus[idx] == 1" :src="AscendSVG" @click="changeSortStatus(idx)">
-                <img v-else-if="sortStatus[idx] == -1" :src="DescendSVG" @click="changeSortStatus(idx)">
+                <img v-if="sortStatus[idx] == 0" :src="OriginSVG" :style="{ filter: this.darkMode ? 'invert(1)' : ''}" @click="changeSortStatus(idx)">
+                <img v-else-if="sortStatus[idx] == 1" :src="AscendSVG" :style="{ filter: this.darkMode ? 'invert(1)' : ''}" @click="changeSortStatus(idx)">
+                <img v-else-if="sortStatus[idx] == -1" :src="DescendSVG" :style="{ filter: this.darkMode ? 'invert(1)' : ''}" @click="changeSortStatus(idx)">
               </div>
             </th>
           </tr>
@@ -45,7 +45,8 @@
   import OriginSVG from "../images/original.svg";
   import AscendSVG from "../images/ascend.svg";
   import DescendSVG from "../images/descend.svg";
-import StatusCard from '../components/StatusCard.vue';
+  import StatusCard from '../components/StatusCard.vue';
+  import { useDark } from '@vueuse/core'
 
   export default {
     name: "Table",
@@ -65,7 +66,8 @@ import StatusCard from '../components/StatusCard.vue';
         changedIdx: -1,
         AscendSVG,
         DescendSVG,
-        OriginSVG
+        OriginSVG,
+        darkMode: useDark()
       };
     },
     watch: {
