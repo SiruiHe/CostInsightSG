@@ -30,41 +30,43 @@
             <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Dashboard</span>
           </h3>
           <ul class="mt-3">
-            <!-- Dashboard -->
+            <!-- CPIbyIncomeGroup -->
             <router-link to="/dashboard/CPIbyIncomeGroup" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
+              <li class="px-3 py-2 rounded-lg mb-1.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
                 <a class="block text-gray-800 dark:text-gray-100 truncate transition" :class="isExactActive ? '' : 'hover:text-gray-900 dark:hover:text-white'" :href="href" @click="navigate">
                   <div class="flex items-center">
-                    <svg class="shrink-0 fill-current" :class="currentRoute.fullPath.includes('CPIbyIncomeGroup') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPIbyIncomeGroup') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} ${!sidebarExpanded? 'my-2' : ''}`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M9 6.855A3.502 3.502 0 0 0 8 0a3.5 3.5 0 0 0-1 6.855v1.656L5.534 9.65a3.5 3.5 0 1 0 1.229 1.578L8 10.267l1.238.962a3.5 3.5 0 1 0 1.229-1.578L9 8.511V6.855ZM6.5 3.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm4.803 8.095c.005-.005.01-.01.013-.016l.012-.016a1.5 1.5 0 1 1-.025.032ZM3.5 11c.474 0 .897.22 1.171.563l.013.016.013.017A1.5 1.5 0 1 1 3.5 11Z" />
                     </svg>
-                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">CPI By Household Income Group</span>
+                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" :class="!sidebarExpanded? 'hidden' : ''">CPI By Household Income Group</span>
                   </div>
                 </a>
               </li>
             </router-link>
+            <!-- CPIvsIncome -->
             <router-link to="/dashboard/CPIvsIncome" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
+              <li class="px-3 py-2 rounded-lg mb-1.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
                 <a class="block text-gray-800 dark:text-gray-100 truncate transition" :class="isExactActive ? '' : 'hover:text-gray-900 dark:hover:text-white'" :href="href" @click="navigate">
                   <div class="flex items-center">
-                    <svg class="shrink-0 fill-current" :class="currentRoute.fullPath.includes('CPIvsIncome') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPIvsIncome') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} ${!sidebarExpanded? 'my-2' : ''}`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M6 0a6 6 0 0 0-6 6c0 1.077.304 2.062.78 2.912a1 1 0 1 0 1.745-.976A3.945 3.945 0 0 1 2 6a4 4 0 0 1 4-4c.693 0 1.344.194 1.936.525A1 1 0 1 0 8.912.779 5.944 5.944 0 0 0 6 0Z" />
                       <path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-4 6a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" />
                     </svg>
-                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">CPI
+                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" :class="!sidebarExpanded? 'hidden' : ''">CPI
                       vs Income</span>
                   </div>
                 </a>
               </li>
             </router-link>
+            <!-- CPITable -->
             <router-link to="/dashboard/CPITable" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
+              <li class="px-3 py-2 rounded-lg mb-1.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
                 <a class="block text-gray-800 dark:text-gray-100 truncate transition" :class="isExactActive ? '' : 'hover:text-gray-900 dark:hover:text-white'" :href="href" @click="navigate">
                   <div class="flex items-center">
-                    <svg class="shrink-0 fill-current" :class="currentRoute.fullPath.includes('CPITable') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPITable') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} ${!sidebarExpanded? 'my-2' : ''}`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M6.753 2.659a1 1 0 0 0-1.506-1.317L2.451 4.537l-.744-.744A1 1 0 1 0 .293 5.207l1.5 1.5a1 1 0 0 0 1.46-.048l3.5-4ZM6.753 10.659a1 1 0 1 0-1.506-1.317l-2.796 3.195-.744-.744a1 1 0 0 0-1.414 1.414l1.5 1.5a1 1 0 0 0 1.46-.049l3.5-4ZM8 4.5a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1ZM9 11.5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" />
                     </svg>
-                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">CPI
+                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" :class="!sidebarExpanded? 'hidden' : ''">CPI
                       Table</span>
                   </div>
                 </a>
@@ -76,16 +78,6 @@
 
       <!-- Expand / collapse button -->
       <div class="flex mt-auto flex-col">
-        <div class="hidden lg:inline-flex 2xl:hidden justify-end">
-          <div class="w-12 pl-4 pr-3 py-2">
-            <button class="cursor-pointer text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400" @click.prevent="sidebarExpanded = !sidebarExpanded">
-              <span class="sr-only">Expand / collapse sidebar</span>
-              <svg class="shrink-0 fill-current text-gray-400 dark:text-gray-500 sidebar-expanded:rotate-180" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                <path d="M15 16a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1ZM8.586 7H1a1 1 0 1 0 0 2h7.586l-2.793 2.793a1 1 0 1 0 1.414 1.414l4.5-4.5A.997.997 0 0 0 12 8.01M11.924 7.617a.997.997 0 0 0-.217-.324l-4.5-4.5a1 1 0 0 0-1.414 1.414L8.586 7M12 7.99a.996.996 0 0 0-.076-.373Z" />
-              </svg>
-            </button>
-          </div>
-        </div>
 
         <!-- Ads Section -->
         <div class="px-3 py-2" :class="!sidebarExpanded? 'hidden' : ''">
@@ -100,6 +92,17 @@
             </div>
             <button class="mt-3 w-full text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
               Learn More →
+            </button>
+          </div>
+        </div>
+
+        <div class="hidden lg:inline-flex 2xl:hidden justify-end">
+          <div class="w-12 pl-4 pr-3 py-2">
+            <button class="cursor-pointer text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400" @click.prevent="sidebarExpanded = !sidebarExpanded">
+              <span class="sr-only">Expand / collapse sidebar</span>
+              <svg class="shrink-0 fill-current text-gray-400 dark:text-gray-500 sidebar-expanded:rotate-180" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <path d="M15 16a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1ZM8.586 7H1a1 1 0 1 0 0 2h7.586l-2.793 2.793a1 1 0 1 0 1.414 1.414l4.5-4.5A.997.997 0 0 0 12 8.01M11.924 7.617a.997.997 0 0 0-.217-.324l-4.5-4.5a1 1 0 0 0-1.414 1.414L8.586 7M12 7.99a.996.996 0 0 0-.076-.373Z" />
+              </svg>
             </button>
           </div>
         </div>
