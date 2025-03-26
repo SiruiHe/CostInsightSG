@@ -1,5 +1,5 @@
 <template>
-  <span class="inline-block rounded-full py-1  dark:text-gray-100 font-medium w-100 text-center" :style="{ 'background-color': this.styleMap[this.label].color}">
+  <span class="inline-block rounded-full py-1  dark:text-gray-950 font-medium w-100 text-center" :style="{ 'background-color': this.styleMap[this.label].color}">
     {{ this.styleMap[this.label].text }}
   </span>
 </template>

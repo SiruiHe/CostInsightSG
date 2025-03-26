@@ -4,7 +4,7 @@
       <h2 class="font-semibold text-gray-800 dark:text-gray-100">Consumer Price Index (CPI) By Household Income Group</h2>
 
       <div class="inline-block relative w-64">
-        <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" v-model="selectedCategory" @change="updateData">
+        <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800" v-model="selectedCategory" @change="updateData">
           <option v-for="category in categoryArray" :key="category" :value="category">{{ category }}</option>
         </select>
       </div>
@@ -12,13 +12,16 @@
     </header>
     <!-- Chart built with Chart.js 3 -->
     <!-- Change the height attribute to adjust the chart height -->
-    <LineChart v-if="chartData" :data="chartData" width="600" height="480" />
+    <LineChart v-if="chartData" :data="chartData" width="600" height="400" />
+
   </div>
+  <DescriptionCard :title="selectedCategory" :description="'World!'"></DescriptionCard>
 </template>
 
 <script>
   import axios from 'axios';
   import LineChart from '../../charts/LineChart.vue'
+  import DescriptionCard from '../../components/DescriptionCard.vue';
 
   // Import utilities
   import { getCssVariable } from '../../utils/Utils'
@@ -27,6 +30,7 @@
     name: 'DashboardCard08',
     components: {
       LineChart,
+      DescriptionCard
     },
     data() {
       return {
@@ -46,7 +50,6 @@
       };
     },
     async created() {
-      this.labelsArray = Array.from({ length: this.endYear - this.startYear + 1 }, (v, i) => (this.startYear + i).toString())
       await this.fetchDatasets();
       this.updateData();
     },
@@ -62,18 +65,24 @@
       },
       updateData() {
         this.filteredData = [];
+        this.labelsArray = [];
         for (let i = 0; i < this.datasets.length; i++) {
           let records = this.datasets[i].data.result.records;
           let categoryObj = records.find(record => { if (record.DataSeries.trim() === this.selectedCategory) return record; });
 
           if (categoryObj) {
             let yearData = [];
-            for (let year = this.startYear; year <= this.endYear; year++) {
-              yearData.push(parseFloat(categoryObj[year.toString()]));
+            for (let yearStr in categoryObj) {
+              let year = parseFloat(yearStr);
+              if (!isNaN(year) && !isNaN(categoryObj[year])) {
+                this.labelsArray.push(year.toString());
+                yearData.push(parseFloat(categoryObj[year]));
+              }
             }
             this.filteredData.push(yearData);
           }
         }
+        this.labelsArray = Array.from(new Set(this.labelsArray)).sort((a, b) => a - b);
         this.drawChart();
       },
       drawChart() {

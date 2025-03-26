@@ -1,17 +1,19 @@
 <template>
-  <div class="flex flex-col col-span-full sm:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
+  <div class="flex flex-col col-span-full sm:col-span-6  bg-white dark:bg-gray-800 shadow-xs rounded-xl">
     <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
       <h2 class="font-semibold text-gray-800 dark:text-gray-100">CPI VS Individual income</h2>
     </header>
-    <!-- Chart built with Chart.js 3 -->
-    <!-- Change the height attribute to adjust the chart height -->
-    <BarChart v-if="chartData" :data="chartData" width="600" height="480" />
+    
+    <BarChart v-if="chartData" :data="chartData" width="600" height="400" />
   </div>
+
+  <DescriptionCard :title="'Hello'" :description="'World!'"></DescriptionCard>
 </template>
 
 <script>
   import axios from 'axios';
   import BarChart from '../../charts/BarChart.vue'
+  import DescriptionCard from '../../components/DescriptionCard.vue';
 
   // Import utilities
   import { getCssVariable } from '../../utils/Utils'
@@ -20,6 +22,7 @@
     name: 'DashboardCard04',
     components: {
       BarChart,
+      DescriptionCard
     },
     data() {
       return {

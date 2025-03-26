@@ -72,7 +72,7 @@ import StatusCard from '../components/StatusCard.vue';
       searchData(newV, _oldV) {
         this.showData = []
         for (let item of this.dataset) {
-          if (item.category.toLowerCase().includes(newV) && this.selectedFilters.indexOf(item.label) > -1) {
+          if (item.category.toLowerCase().includes(newV.toLowerCase()) && this.selectedFilters.indexOf(item.label) > -1) {
             this.showData.push(item);
           }
         }
@@ -81,7 +81,7 @@ import StatusCard from '../components/StatusCard.vue';
       selectedFilters(newV, _oldV) {
         this.showData = []
         for (let item of this.dataset) {
-          if (newV.indexOf(item.label) > -1 && item.category.toLowerCase().includes(this.searchData)) {
+          if (newV.indexOf(item.label) > -1 && item.category.toLowerCase().includes(this.searchData.toLowerCase())) {
             this.showData.push(item);
           }
         }
