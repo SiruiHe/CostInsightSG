@@ -40,8 +40,6 @@
           "d_36c4af91ffd0a75f6b557960efcb476e", // low 20
           "d_c5bde9ed17cef8c365629311f8550ce2"  // high 20
         ],
-        startYear: 2004,
-        endYear: 2024,
         labelsArray: [],
         categoryArray: ["All Items", "Food", "Transport", "Recreation & Culture", "Education", "Health Care", "Household Durables", "Miscellaneous Goods & Services", "Communication", "Clothing & Footwear", "Housing & Utilities"],
         filteredData: [],

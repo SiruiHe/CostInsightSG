@@ -40,7 +40,7 @@
         startYear: 2014,
         endYear: 2024,
         searchData: "",
-        selectedFilters: ["All items", "Food", "Clothing & Footwear", "Housing & Utilities", "Household Durables", "Health Care", "Transport", "Communication", "Recreation & Culture", "Education", "Miscellaneous Goods & Services"],
+        selectedFilters: ["All Items", "Food", "Clothing & Footwear", "Housing & Utilities", "Household Durables", "Health Care", "Transport", "Communication", "Recreation & Culture", "Education", "Miscellaneous Goods & Services"],
 
         CloseSVG,
         headers: ["Data Series", "Label", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014"]
@@ -79,7 +79,7 @@
       },
       getLabel(idx) {
         if (idx == 0 || idx == 150 || idx == 151) {
-          return "All items";
+          return "All Items";
         } else if (1 <= idx && idx <= 54) {
           return "Food";
         } else if (55 <= idx && idx <= 64) {

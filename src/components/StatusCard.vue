@@ -10,7 +10,7 @@
     data() {
       return {
         styleMap: {
-          "All items": { "text": "All", "color": "#BCDFF6" },
+          "All Items": { "text": "All", "color": "#BCDFF6" },
           "Food": { "text": "Food", "color": "#C8E5E4" },
           "Clothing & Footwear": { "text": "Fashion", "color": "#ECDAEA" },
           "Housing & Utilities": { "text": "Housing", "color": "#EAE2B2" },
