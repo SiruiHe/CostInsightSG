@@ -25,7 +25,7 @@
       <div class="space-y-8">
         <!-- Pages group -->
         <div>
-          <h3 class="text-xs uppercase text-gray-400 dark:text-gray-500 font-semibold pl-3">
+          <h3 class="text-xs uppercase text-gray-400 dark:text-gray-500 font-semibold pl-2">
             <span class="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
             <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Dashboard</span>
           </h3>
@@ -35,10 +35,10 @@
               <li class="px-3 py-2 rounded-lg mb-1.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
                 <a class="block text-gray-800 dark:text-gray-100 truncate transition" :class="isExactActive ? '' : 'hover:text-gray-900 dark:hover:text-white'" :href="href" @click="navigate">
                   <div class="flex items-center">
-                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPIbyIncomeGroup') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} ${!sidebarExpanded? 'my-2' : ''}`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPIbyIncomeGroup') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} my-1`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M9 6.855A3.502 3.502 0 0 0 8 0a3.5 3.5 0 0 0-1 6.855v1.656L5.534 9.65a3.5 3.5 0 1 0 1.229 1.578L8 10.267l1.238.962a3.5 3.5 0 1 0 1.229-1.578L9 8.511V6.855ZM6.5 3.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm4.803 8.095c.005-.005.01-.01.013-.016l.012-.016a1.5 1.5 0 1 1-.025.032ZM3.5 11c.474 0 .897.22 1.171.563l.013.016.013.017A1.5 1.5 0 1 1 3.5 11Z" />
                     </svg>
-                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" :class="!sidebarExpanded? 'hidden' : ''">CPI By Household Income Group</span>
+                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-20 2xl:block" :class="!sidebarExpanded && !sidebarOpen? 'hidden' : ''">CPI By Household Income Group</span>
                   </div>
                 </a>
               </li>
@@ -48,11 +48,11 @@
               <li class="px-3 py-2 rounded-lg mb-1.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
                 <a class="block text-gray-800 dark:text-gray-100 truncate transition" :class="isExactActive ? '' : 'hover:text-gray-900 dark:hover:text-white'" :href="href" @click="navigate">
                   <div class="flex items-center">
-                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPIvsIncome') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} ${!sidebarExpanded? 'my-2' : ''}`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPIvsIncome') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} my-1`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M6 0a6 6 0 0 0-6 6c0 1.077.304 2.062.78 2.912a1 1 0 1 0 1.745-.976A3.945 3.945 0 0 1 2 6a4 4 0 0 1 4-4c.693 0 1.344.194 1.936.525A1 1 0 1 0 8.912.779 5.944 5.944 0 0 0 6 0Z" />
                       <path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-4 6a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" />
                     </svg>
-                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" :class="!sidebarExpanded? 'hidden' : ''">CPI
+                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 2xl:block" :class="!sidebarExpanded && !sidebarOpen? 'hidden' : ''">CPI
                       vs Income</span>
                   </div>
                 </a>
@@ -63,10 +63,10 @@
               <li class="px-3 py-2 rounded-lg mb-1.5 last:mb-0 bg-linear-to-r" :class="isExactActive && 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]'">
                 <a class="block text-gray-800 dark:text-gray-100 truncate transition" :class="isExactActive ? '' : 'hover:text-gray-900 dark:hover:text-white'" :href="href" @click="navigate">
                   <div class="flex items-center">
-                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPITable') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} ${!sidebarExpanded? 'my-2' : ''}`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg class="shrink-0 fill-current" :class="`${currentRoute.fullPath.includes('CPITable') ? 'text-violet-500' : 'text-gray-400 dark:text-gray-500'} my-1`" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M6.753 2.659a1 1 0 0 0-1.506-1.317L2.451 4.537l-.744-.744A1 1 0 1 0 .293 5.207l1.5 1.5a1 1 0 0 0 1.46-.048l3.5-4ZM6.753 10.659a1 1 0 1 0-1.506-1.317l-2.796 3.195-.744-.744a1 1 0 0 0-1.414 1.414l1.5 1.5a1 1 0 0 0 1.46-.049l3.5-4ZM8 4.5a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1ZM9 11.5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" />
                     </svg>
-                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" :class="!sidebarExpanded? 'hidden' : ''">CPI
+                    <span class="text-sm font-medium ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 2xl:block" :class="!sidebarExpanded && !sidebarOpen? 'hidden' : ''">CPI
                       Table</span>
                   </div>
                 </a>
@@ -80,7 +80,7 @@
       <div class="flex mt-auto flex-col">
 
         <!-- Ads Section -->
-        <div class="px-3 py-2" :class="!sidebarExpanded? 'hidden' : ''">
+        <div class="px-3 py-2 2xl:block" :class="!sidebarExpanded && !sidebarOpen? 'hidden' : ''">
           <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-3">
             <div class="flex items-center justify-between mb-2">
               <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Sponsored</h3>
@@ -167,9 +167,22 @@
         document.addEventListener('keydown', keyHandler)
       })
 
+      const observer = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          const width = entry.contentRect.width;
+
+          if (width >= 1024 && props.sidebarOpen) {
+            emit('close-sidebar');
+          }
+        }
+      });
+
+      observer.observe(document.body);
+      
       onUnmounted(() => {
         document.removeEventListener('click', clickHandler)
         document.removeEventListener('keydown', keyHandler)
+        observer.disconnect();
       })
 
       watch(sidebarExpanded, () => {

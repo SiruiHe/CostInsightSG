@@ -4,7 +4,7 @@
       <h2 class="font-semibold text-gray-800 dark:text-gray-100">CPI VS Individual income</h2>
     </header>
     
-    <BarChart v-if="chartData" :data="chartData" width="600" height="400" />
+    <BarChart v-if="chartData" :data="chartData" width="400" height="300" />
   </div>
 
   <DescriptionCard :title="'Hello'" :description="'World!'"></DescriptionCard>
@@ -50,7 +50,6 @@
 
         try {
           this.datasets = await Promise.all(urls.map(url => axios.get(url)));
-          console.log(this.datasets);
         } catch (error) {
           console.error("Error fetching datasets:", error);
         }

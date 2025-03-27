@@ -12,7 +12,7 @@
     </header>
     <!-- Chart built with Chart.js 3 -->
     <!-- Change the height attribute to adjust the chart height -->
-    <LineChart v-if="chartData" :data="chartData" width="600" height="400" />
+    <LineChart v-if="chartData" :data="chartData" width="400" height="300" />
 
   </div>
   <DescriptionCard :title="selectedCategory" :description="'World!'"></DescriptionCard>

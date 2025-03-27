@@ -56,7 +56,6 @@
         try {
           const response = await axios.get(url);
           let dataset = response.data.result.records;
-          console.log(dataset.length);
           await this.processData(dataset);
         } catch (error) {
           console.error("Error fetching dataset:", error);
