@@ -37,7 +37,7 @@
         datasets: null,
         categoryArray: ["All Items", "Food", "Transport", "Recreation & Culture", "Education", "Health Care", "Household Durables & Services", "Miscellaneous Goods & Services", "Communication", "Clothing & Footwear", "Housing & Utilities"],
         labelsArray: [],
-        filteredData: {"Highest": [], "Lowest": [], "Middle": []},
+        filteredData: { "Highest": [], "Lowest": [], "Middle": [] },
         selectedCategory: 'All Items',
         chartData: null,
       };
@@ -48,7 +48,10 @@
     methods: {
       async fetchDatasets() {
         const category = encodeURIComponent(this.selectedCategory);
-        await fetch(`/cpi?category=${category}`)
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+        console.log(apiBaseUrl.length)
+
+        await fetch(`${apiBaseUrl}/cpi?category=${category}`)
           .then(response => response.json())
           .then(data => {
             this.datasets = data;
@@ -57,7 +60,7 @@
       },
       async updateData() {
         await this.fetchDatasets();
-        this.filteredData = {"Highest": [], "Lowest": [], "Middle": []};
+        this.filteredData = { "Highest": [], "Lowest": [], "Middle": [] };
         this.labelsArray = [];
         for (let idx in this.datasets) {
           this.labelsArray.push(this.datasets[idx].year);
