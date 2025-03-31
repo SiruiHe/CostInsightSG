@@ -16,13 +16,13 @@ export default defineConfig(({ mode }) => {
       }
     },
     server: {
-      proxy: !isProduction ? {
-      '/api': {
-        target: 'https://cz9nnvaeqa.execute-api.ap-southeast-1.amazonaws.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/cpi'),
+      proxy: {
+        '/api': {
+          target: 'https://cz9nnvaeqa.execute-api.ap-southeast-1.amazonaws.com',
+          changeOrigin: !isProduction,
+          rewrite: (path) => path.replace(/^\/api/, '/cpi'),
+        },
       },
-      } : undefined,
     }
   };
 });
