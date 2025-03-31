@@ -35,52 +35,37 @@
     data() {
       return {
         datasets: null,
-        datasetIds: [
-          "d_8f3660871b62f38609915ee7ef45ee2c", // 60
-          "d_36c4af91ffd0a75f6b557960efcb476e", // low 20
-          "d_c5bde9ed17cef8c365629311f8550ce2"  // high 20
-        ],
+        categoryArray: ["All Items", "Food", "Transport", "Recreation & Culture", "Education", "Health Care", "Household Durables & Services", "Miscellaneous Goods & Services", "Communication", "Clothing & Footwear", "Housing & Utilities"],
         labelsArray: [],
-        categoryArray: ["All Items", "Food", "Transport", "Recreation & Culture", "Education", "Health Care", "Household Durables", "Miscellaneous Goods & Services", "Communication", "Clothing & Footwear", "Housing & Utilities"],
-        filteredData: [],
+        filteredData: {"Highest": [], "Lowest": [], "Middle": []},
         selectedCategory: 'All Items',
         chartData: null,
       };
     },
     async created() {
-      await this.fetchDatasets();
-      this.updateData();
+      await this.updateData();
     },
     methods: {
       async fetchDatasets() {
-        const urls = this.datasetIds.map(id => `https://data.gov.sg/api/action/datastore_search?resource_id=${id}`);
-
-        try {
-          this.datasets = await Promise.all(urls.map(url => axios.get(url)));
-        } catch (error) {
-          console.error("Error fetching datasets:", error);
-        }
+        const category = encodeURIComponent(this.selectedCategory);
+        await fetch(`/api?category=${category}`)
+          .then(response => response.json())
+          .then(data => {
+            this.datasets = data;
+          })
+          .catch(error => console.error('Error:', error));
       },
-      updateData() {
-        this.filteredData = [];
+      async updateData() {
+        await this.fetchDatasets();
+        this.filteredData = {"Highest": [], "Lowest": [], "Middle": []};
         this.labelsArray = [];
-        for (let i = 0; i < this.datasets.length; i++) {
-          let records = this.datasets[i].data.result.records;
-          let categoryObj = records.find(record => { if (record.DataSeries.trim() === this.selectedCategory) return record; });
+        for (let idx in this.datasets) {
+          this.labelsArray.push(this.datasets[idx].year);
 
-          if (categoryObj) {
-            let yearData = [];
-            for (let yearStr in categoryObj) {
-              let year = parseFloat(yearStr);
-              if (!isNaN(year) && !isNaN(categoryObj[year])) {
-                this.labelsArray.push(year.toString());
-                yearData.push(parseFloat(categoryObj[year]));
-              }
-            }
-            this.filteredData.push(yearData);
-          }
+          this.filteredData.Highest.push(this.datasets[idx].Highest);
+          this.filteredData.Middle.push(this.datasets[idx].Middle);
+          this.filteredData.Lowest.push(this.datasets[idx].Lowest);
         }
-        this.labelsArray = Array.from(new Set(this.labelsArray)).sort((a, b) => a - b);
         this.drawChart();
       },
       drawChart() {
@@ -90,7 +75,7 @@
             // Indigo line
             {
               label: 'Middle 60%',
-              data: this.filteredData[0],
+              data: this.filteredData.Middle,
               borderColor: getCssVariable('--color-violet-500'),
               fill: false,
               borderWidth: 2,
@@ -106,7 +91,7 @@
             // Blue line
             {
               label: 'Lowest 20%',
-              data: this.filteredData[1],
+              data: this.filteredData.Lowest,
               borderColor: getCssVariable('--color-sky-500'),
               fill: false,
               borderWidth: 2,
@@ -119,7 +104,7 @@
             // Green line
             {
               label: 'Highest 20%',
-              data: this.filteredData[2],
+              data: this.filteredData.Highest,
               borderColor: getCssVariable('--color-green-500'),
               fill: false,
               borderWidth: 2,

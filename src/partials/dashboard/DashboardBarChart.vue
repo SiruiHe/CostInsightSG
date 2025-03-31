@@ -3,7 +3,7 @@
     <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
       <h2 class="font-semibold text-gray-800 dark:text-gray-100">CPI VS Individual income</h2>
     </header>
-    
+
     <BarChart v-if="chartData" :data="chartData" width="400" height="300" />
   </div>
 
@@ -27,55 +27,32 @@
     data() {
       return {
         datasets: null,
-        datasetIds: [
-          "d_dcb352661fb449c4a4c0ab23aa8d6399", // CPI
-          "d_0fb1c8d8f8e4f7733e0486837e54a0c7", // Income
-        ],
-        startYear: 2004,
-        endYear: 2023,
         labelsArray: [],
-        filteredData: [],
+        filteredData: { "cpi": [], "income": [] },
         selectedCategory: 'All Items',
         chartData: null,
       };
     },
     async created() {
-      this.labelsArray = Array.from({ length: this.endYear - this.startYear + 1 }, (v, i) => (this.startYear + i).toString());
       await this.fetchDatasets();
       this.updateData();
     },
     methods: {
       async fetchDatasets() {
-        const urls = this.datasetIds.map(id => `https://data.gov.sg/api/action/datastore_search?resource_id=${id}`);
-
-        try {
-          this.datasets = await Promise.all(urls.map(url => axios.get(url)));
-        } catch (error) {
-          console.error("Error fetching datasets:", error);
-        }
+        await fetch('/api?category=income')
+          .then(response => response.json())
+          .then(data => {
+            this.datasets = data;
+          })
+          .catch(error => console.error('Error:', error));
       },
       updateData() {
-        this.filteredData = [];
-        // CPI
-        let records = this.datasets[0].data.result.records;
-        let categoryObj = records.find(record => { if (record.DataSeries === this.selectedCategory) return record; });
-
-        if (categoryObj) {
-          let yearData = [];
-          for (let year = this.startYear; year <= this.endYear; year++) {
-            yearData.push(parseFloat(categoryObj[year.toString()]));
-          }
-          this.filteredData.push(yearData);
+        this.filteredData = { "cpi": [], "income": [] };
+        for (let idx in this.datasets) {
+          this.labelsArray.push(this.datasets[idx].year);
+          this.filteredData.cpi.push(this.datasets[idx].cpi);
+          this.filteredData.income.push(this.datasets[idx].income);
         }
-
-        // Income
-        records = this.datasets[1].data.result.records;
-        let yearData = [];
-        let standard = records[15].total_income/records[15].no_of_indv_assessed;
-        for (let i = 0; i < records.length; i++) {
-          yearData.push(parseFloat(records[i].total_income/records[i].no_of_indv_assessed/standard*100));
-        }
-        this.filteredData.push(yearData);
         this.drawChart();
       },
       drawChart() {
@@ -85,7 +62,7 @@
             // Light blue bars
             {
               label: 'CPI',
-              data: this.filteredData[0],
+              data: this.filteredData.cpi,
               backgroundColor: getCssVariable('--color-sky-500'),
               hoverBackgroundColor: getCssVariable('--color-sky-600'),
               barPercentage: 0.7,
@@ -95,7 +72,7 @@
             // Blue bars
             {
               label: 'Income',
-              data: this.filteredData[1],
+              data: this.filteredData.income,
               backgroundColor: getCssVariable('--color-violet-500'),
               hoverBackgroundColor: getCssVariable('--color-violet-600'),
               barPercentage: 0.7,
