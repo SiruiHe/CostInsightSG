@@ -19,7 +19,8 @@ export default defineConfig(({ mode }) => {
       proxy: {
         '/cpi': {
           target: 'https://cz9nnvaeqa.execute-api.ap-southeast-1.amazonaws.com',
-          changeOrigin: !isProduction,
+          changeOrigin: true,
+          secure: isProduction
         },
       },
     }

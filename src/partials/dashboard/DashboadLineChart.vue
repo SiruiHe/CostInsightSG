@@ -49,10 +49,7 @@
       async fetchDatasets() {
         const category = encodeURIComponent(this.selectedCategory);
         await fetch(`/cpi?category=${category}`)
-          .then(response => {
-            console.log(response)
-            return response.json()
-          })
+          .then(response => response.json())
           .then(data => {
             this.datasets = data;
           })
