@@ -39,7 +39,7 @@
     },
     methods: {
       async fetchDatasets() {
-        await fetch('/api?category=income')
+        await fetch('/cpi?category=income')
           .then(response => response.json())
           .then(data => {
             this.datasets = data;

@@ -48,8 +48,11 @@
     methods: {
       async fetchDatasets() {
         const category = encodeURIComponent(this.selectedCategory);
-        await fetch(`/api?category=${category}`)
-          .then(response => response.json())
+        await fetch(`/cpi?category=${category}`)
+          .then(response => {
+            console.log(response)
+            return response.json()
+          })
           .then(data => {
             this.datasets = data;
           })
