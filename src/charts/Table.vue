@@ -5,7 +5,7 @@
       <table class="table-auto w-full dark:text-gray-300" cellspacing="0">
         <thead class="text-l uppercase text-gray-400 dark:text-gray-500 bg-gray-50 dark:bg-gray-700/50 rounded-xs">
           <tr>
-            <th v-for="(value, idx) in headers" scope="col" class="p-3 font-semibold" :key="value" :class="`${idx == this.greenYear ? 'text-green-500': ''} ${getWidth(idx)}`">
+            <th v-for="(value, idx) in headers" scope="col" class="p-3 font-semibold" :key="value" :class="`${getFontColor(idx, 0)} ${getWidth(idx)}`">
               <div class="flex" :class="`${idx == 0 ? '': 'justify-center'}`">
                 {{ value }}
                 <img v-if="sortStatus[idx] == 0" :src="OriginSVG" :style="{ filter: this.darkMode ? 'invert(1)' : ''}" @click="changeSortStatus(idx)">
@@ -18,7 +18,7 @@
         <tbody class="text-sm font-medium divide-y divide-gray-100 dark:divide-gray-700/60">
           <tr v-for="item in showUnitData" :key="item.category">
             <td :title="item.category" class="p-3">
-              <div class="flex items-center fix-width-l fixed-col dark:text-gray-100 font-medium text-start">
+              <div class="flex items-center fix-width-l fixed-col dark:text-gray-100 font-medium text-start" :class="`${item.category.length > 20 ? 'text-xs' : 'text-sm'}`">
                 {{ item.category }}
               </div>
             </td>
@@ -27,7 +27,7 @@
                 <StatusCard :label="item.label"></StatusCard>
               </div>
             </td>
-            <td v-for="(value, idx) in item.values" :key="value" class="p-3 text-center" :class="`${idx == this.greenYear-2 ? 'text-green-500': ''}`"> {{ formatValue(value) }}
+            <td v-for="(value, idx) in item.values" :key="value" class="p-3 text-center" :class="`${getFontColor(idx, -2)}`"> {{ formatValue(value) }}
             </td>
           </tr>
         </tbody>
@@ -56,10 +56,11 @@
       return {
         showUnitData: [],
         showData: [],
-        showUnit: 10,
+        showUnit: 8,
         pageStart: 0,
         pageEnd: this.showUnit,
-        greenYear: 7,
+        greenYear: 8,
+        predictYeat: 2,
 
         // -2 for display:none; 1 for ascending; -1 for descending; 0 for original order
         sortStatus: [-2, -2],
@@ -122,6 +123,7 @@
       },
       formatValue(value) {
         if (value == 0) return '-';
+        else if (value == 100) return 100;
         return formatValue(value);
       },
       changeSortStatus(idx) {
@@ -146,6 +148,11 @@
         if (idx == 0) return 'fix-width-l fixed-col';
         if (idx == 1) return 'fix-width-m fixed-col';
         else return '';
+      },
+      getFontColor(idx, pos) {
+        if (idx == this.greenYear + pos) return 'text-green-500';
+        else if (idx == this.predictYeat + pos) return 'text-yellow-500';
+        return '';
       }
     },
   }

@@ -18,7 +18,6 @@
     methods: {
       addLineBreaks(text) {
         let processedText = text.replace(/(?<!\d)(?<!\b(?:vs|e\.g|i\.e))([.!?])\s+/g, '$1\n');
-        console.log(processedText.split('\n'));
         return processedText.split('\n');
         // return text;
       }

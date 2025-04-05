@@ -49,7 +49,7 @@
     methods: {
       async fetchDatasets() {
         const category = encodeURIComponent(this.selectedCategory);
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL_1;
 
         await fetch(`${apiBaseUrl}/cpi?category=${category}`)
           .then(response => response.json())

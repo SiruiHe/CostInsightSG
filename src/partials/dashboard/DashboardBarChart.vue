@@ -40,7 +40,7 @@
     },
     methods: {
       async fetchDatasets() {
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL_1;
         await fetch(`${apiBaseUrl}/cpi?category=income`)
           .then(response => response.json())
           .then(data => {

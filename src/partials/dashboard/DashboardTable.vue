@@ -4,7 +4,7 @@
       <h2 class="font-semibold text-gray-800 dark:text-gray-100">Annual Consumer Price Index (CPI)</h2>
 
       <div class="flex items-center relative w-70">
-        <FilterButton :labels="selectedFilters" @update:filters="updateFilters" />
+        <FilterButton v-if="selectedFilters.length" :labels="selectedFilters" @update:filters="updateFilters" />
         <div class="flex items-center ms-2">
           <svg class="absolute shrink-0 fill-current text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-400 ml-3" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  import axios from 'axios';
   import TableVue from '../../charts/Table.vue'
   import CloseSVG from "../../images/close.svg";
   import FilterButton from '../../components/DropdownFilter.vue'
@@ -38,12 +37,12 @@
         dataset: [],
         datasetId: "d_dcb352661fb449c4a4c0ab23aa8d6399",
         startYear: 2014,
-        endYear: 2024,
+        endYear: 2025,
         searchData: "",
-        selectedFilters: ["All Items", "Food", "Clothing & Footwear", "Housing & Utilities", "Household Durables", "Health Care", "Transport", "Communication", "Recreation & Culture", "Education", "Miscellaneous Goods & Services"],
+        selectedFilters: [],
 
         CloseSVG,
-        headers: ["Data Series", "Label", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014"]
+        headers: ["Data Series", "Label", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014"]
       }
     },
     async created() {
@@ -51,56 +50,35 @@
     },
     methods: {
       async fetchDatasets() {
-        const url = `https://data.gov.sg/api/action/datastore_search?resource_id=${this.datasetId}`;
-
-        try {
-          const response = await axios.get(url);
-          let dataset = response.data.result.records;
-          await this.processData(dataset);
-        } catch (error) {
-          console.error("Error fetching dataset:", error);
-        }
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL_2;
+        await fetch(`${apiBaseUrl}/getAllCPI`)
+          .then(response => response.json())
+          .then(async data => {
+            let dataset = data;
+            console.log(dataset)
+            await this.processData(dataset);
+          })
+          .catch(error => console.error('Error:', error));
       },
       async processData(dataset) {
-        for (let i = 0; i < dataset.length; i++) {
-          let obj = { "category": null, "values": [], "index": i, "label": this.getLabel(i) };
-          obj.category = dataset[i].DataSeries.trim();
-          for (let year = this.endYear; year >= this.startYear; year--) {
-            let val = parseFloat(dataset[i][year.toString()]);
-            if (isNaN(val)) val = 0;
+        let selectedFilters = new Set();
+        dataset.forEach((data, i) => {
+          let obj = { "category": data.category, "values": [], "index": i, "label": data.label };
+          selectedFilters.add(data.label)
+          for (let year = this.endYear, index = data.value.length-1; year >= this.startYear; year--, index--) {
+            let val = 0;
+            if (index >= 0 && year == parseInt(Object.keys(data.value[index])[0])) {
+              val = data.value[index][year];
+            }
             obj.values.push(val);
           }
           this.dataset.push(obj);
-        }
+        })
+        this.selectedFilters = Array.from(selectedFilters);
       },
       updateFilters(filters) {
         this.selectedFilters = filters;
       },
-      getLabel(idx) {
-        if (idx == 0 || idx == 150 || idx == 151) {
-          return "All Items";
-        } else if (1 <= idx && idx <= 54) {
-          return "Food";
-        } else if (55 <= idx && idx <= 64) {
-          return "Clothing & Footwear";
-        } else if (65 <= idx && idx <= 71) {
-          return "Housing & Utilities";
-        } else if (72 <= idx && idx <= 81) {
-          return "Household Durables";
-        } else if (82 <= idx && idx <= 93) {
-          return "Health Care";
-        } else if (94 <= idx && idx <= 106) {
-          return "Transport";
-        } else if (107 <= idx && idx <= 110) {
-          return "Communication";
-        } else if (111 <= idx && idx <= 128) {
-          return "Recreation & Culture";
-        } else if (129 <= idx && idx <= 135) {
-          return "Education";
-        } else if (136 <= idx && idx <= 149) {
-          return "Miscellaneous Goods & Services";
-        }
-      }
     },
   }
 </script>
