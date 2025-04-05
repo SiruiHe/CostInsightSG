@@ -15,7 +15,7 @@
     <LineChart v-if="chartData" :data="chartData" width="400" height="300" />
 
   </div>
-  <DescriptionCard :title="selectedCategory" :description="'World!'"></DescriptionCard>
+  <DescriptionCard :title="'Analysis'" :description="analysis"></DescriptionCard>
 </template>
 
 <script>
@@ -35,6 +35,7 @@
     data() {
       return {
         datasets: null,
+        analysis: "",
         categoryArray: ["All Items", "Food", "Transport", "Recreation & Culture", "Education", "Health Care", "Household Durables & Services", "Miscellaneous Goods & Services", "Communication", "Clothing & Footwear", "Housing & Utilities"],
         labelsArray: [],
         filteredData: { "Highest": [], "Lowest": [], "Middle": [] },
@@ -49,12 +50,12 @@
       async fetchDatasets() {
         const category = encodeURIComponent(this.selectedCategory);
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        console.log(apiBaseUrl.length)
 
         await fetch(`${apiBaseUrl}/cpi?category=${category}`)
           .then(response => response.json())
           .then(data => {
-            this.datasets = data;
+            this.datasets = data.cpi_data;
+            this.analysis = data.analysis;
           })
           .catch(error => console.error('Error:', error));
       },

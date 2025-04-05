@@ -7,7 +7,7 @@
     <BarChart v-if="chartData" :data="chartData" width="400" height="300" />
   </div>
 
-  <DescriptionCard :title="'Hello'" :description="'World!'"></DescriptionCard>
+  <DescriptionCard :title="'Analysis'" :description="analysis"></DescriptionCard>
 </template>
 
 <script>
@@ -27,6 +27,7 @@
     data() {
       return {
         datasets: null,
+        analysis: "",
         labelsArray: [],
         filteredData: { "cpi": [], "income": [] },
         selectedCategory: 'All Items',
@@ -43,7 +44,8 @@
         await fetch(`${apiBaseUrl}/cpi?category=income`)
           .then(response => response.json())
           .then(data => {
-            this.datasets = data;
+            this.datasets = data.cpi_data;
+            this.analysis = data.analysis;
           })
           .catch(error => console.error('Error:', error));
       },
