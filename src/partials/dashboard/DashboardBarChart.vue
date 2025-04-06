@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-col col-span-full sm:col-span-6  bg-white dark:bg-gray-800 shadow-xs rounded-xl">
     <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60">
-      <h2 class="font-semibold text-gray-800 dark:text-gray-100">CPI VS Individual income</h2>
+      <div class="flex">
+        <h2 class="font-semibold text-gray-800 dark:text-gray-100">CPI VS Individual income</h2>
+        <HelpTip :content="tipContent" :width="9"></HelpTip>
+      </div>
     </header>
 
     <BarChart v-if="chartData" :data="chartData" width="400" height="300" />
@@ -11,9 +14,9 @@
 </template>
 
 <script>
-  import axios from 'axios';
   import BarChart from '../../charts/BarChart.vue'
   import DescriptionCard from '../../components/DescriptionCard.vue';
+  import HelpTip from '../../components/HelpTip.vue';
 
   // Import utilities
   import { getCssVariable } from '../../utils/Utils'
@@ -21,8 +24,7 @@
   export default {
     name: 'DashboardCard04',
     components: {
-      BarChart,
-      DescriptionCard
+      BarChart, DescriptionCard, HelpTip
     },
     data() {
       return {
@@ -31,6 +33,7 @@
         labelsArray: [],
         filteredData: { "cpi": [], "income": [] },
         selectedCategory: 'All Items',
+        tipContent: "2019 is the base year",
         chartData: null,
       };
     },

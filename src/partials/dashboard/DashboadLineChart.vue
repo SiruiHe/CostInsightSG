@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-col col-span-full sm:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
     <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60 flex items-center justify-between">
-      <h2 class="font-semibold text-gray-800 dark:text-gray-100">Consumer Price Index (CPI) By Household Income Group</h2>
+      <div class="flex">
+        <h2 class="font-semibold text-gray-800 dark:text-gray-100">Consumer Price Index (CPI) By Household Income Group</h2>
+        <HelpTip :content="tipContent" :width="9"></HelpTip>
+      </div>
 
       <div class="inline-block relative w-64">
         <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800" v-model="selectedCategory" @change="updateData">
@@ -19,7 +22,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import HelpTip from '../../components/HelpTip.vue';
   import LineChart from '../../charts/LineChart.vue'
   import DescriptionCard from '../../components/DescriptionCard.vue';
 
@@ -29,8 +32,7 @@
   export default {
     name: 'DashboardCard08',
     components: {
-      LineChart,
-      DescriptionCard
+      LineChart, HelpTip, DescriptionCard
     },
     data() {
       return {
@@ -40,6 +42,7 @@
         labelsArray: [],
         filteredData: { "Highest": [], "Lowest": [], "Middle": [] },
         selectedCategory: 'All Items',
+        tipContent: "2019 is the base year",
         chartData: null,
       };
     },

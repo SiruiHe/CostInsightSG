@@ -51,7 +51,7 @@
   export default {
     name: "Table",
     components: { Pagination, StatusCard },
-    props: ['dataset', 'headers', 'searchData', 'selectedFilters'],
+    props: ['dataset', 'headers', 'searchData'],
     data() {
       return {
         showUnitData: [],
@@ -68,23 +68,23 @@
         AscendSVG,
         DescendSVG,
         OriginSVG,
-        darkMode: useDark()
+        darkMode: useDark(),
       };
     },
     watch: {
       searchData(newV, _oldV) {
         this.showData = []
         for (let item of this.dataset) {
-          if (item.category.toLowerCase().includes(newV.toLowerCase()) && this.selectedFilters.indexOf(item.label) > -1) {
+          if (item.category.toLowerCase().includes(newV.toLowerCase())) {
             this.showData.push(item);
           }
         }
         this.showUnitData = this.showData.slice(0, this.showUnit);
       },
-      selectedFilters(newV, _oldV) {
+      dataset(newV, _oldV) {
         this.showData = []
-        for (let item of this.dataset) {
-          if (newV.indexOf(item.label) > -1 && item.category.toLowerCase().includes(this.searchData.toLowerCase())) {
+        for (let item of newV) {
+          if (item.category.toLowerCase().includes(this.searchData.toLowerCase())) {
             this.showData.push(item);
           }
         }

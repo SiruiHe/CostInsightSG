@@ -1,7 +1,10 @@
 <template>
   <div class="col-span-full xl:col-span-8 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
     <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60 flex items-center justify-between">
-      <h2 class="font-semibold text-gray-800 dark:text-gray-100">Annual Consumer Price Index (CPI)</h2>
+      <div class="flex">
+        <h2 class="font-semibold text-gray-800 dark:text-gray-100">Annual Consumer Price Index (CPI)</h2>
+        <HelpTip :content="tipContent" :width="11"></HelpTip>
+      </div>
 
       <div class="flex items-center relative w-70">
         <FilterButton v-if="selectedFilters.length" :labels="selectedFilters" @update:filters="updateFilters" />
@@ -20,7 +23,7 @@
     <div class="p-3">
 
       <!-- Table -->
-      <TableVue v-if="dataset" :dataset="dataset" :headers="headers" :searchData="searchData" :selectedFilters="selectedFilters"></TableVue>
+      <TableVue v-if="dataset" :dataset="dataset" :headers="headers" :searchData="searchData"></TableVue>
     </div>
   </div>
 </template>
@@ -29,9 +32,10 @@
   import TableVue from '../../charts/Table.vue'
   import CloseSVG from "../../images/close.svg";
   import FilterButton from '../../components/DropdownFilter.vue'
+  import HelpTip from '../../components/HelpTip.vue';
   export default {
     name: 'DashboardCard07',
-    components: { TableVue, FilterButton },
+    components: { TableVue, FilterButton, HelpTip },
     data() {
       return {
         dataset: [],
@@ -42,6 +46,7 @@
         selectedFilters: [],
 
         CloseSVG,
+        tipContent: "Green for the base year\nYellow for the forecast year",
         headers: ["Data Series", "Label", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014"]
       }
     },
@@ -55,17 +60,16 @@
           .then(response => response.json())
           .then(async data => {
             let dataset = data;
-            console.log(dataset)
-            await this.processData(dataset);
+            await this.processData(dataset, true);
           })
           .catch(error => console.error('Error:', error));
       },
-      async processData(dataset) {
+      async processData(dataset, first=false) {
         let selectedFilters = new Set();
         dataset.forEach((data, i) => {
           let obj = { "category": data.category, "values": [], "index": i, "label": data.label };
-          selectedFilters.add(data.label)
-          for (let year = this.endYear, index = data.value.length-1; year >= this.startYear; year--, index--) {
+          if (first) selectedFilters.add(data.label)
+          for (let year = this.endYear, index = data.value.length - 1; year >= this.startYear; year--, index--) {
             let val = 0;
             if (index >= 0 && year == parseInt(Object.keys(data.value[index])[0])) {
               val = data.value[index][year];
@@ -74,10 +78,28 @@
           }
           this.dataset.push(obj);
         })
-        this.selectedFilters = Array.from(selectedFilters);
+        if (first) this.selectedFilters = Array.from(selectedFilters);
       },
-      updateFilters(filters) {
-        this.selectedFilters = filters;
+      async updateFilters(filters) {
+        if (filters.length == 0) {
+          this.dataset = [];
+          return;
+        }
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL_2;
+        const selectedFilters = encodeURIComponent(JSON.stringify(filters));
+        await fetch(`${apiBaseUrl}/getAllCPI?label=${selectedFilters}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(async data => {
+            let dataset = data;
+            this.dataset = [];
+            await this.processData(dataset);
+          })
+          .catch(error => console.error('Error:', error));
       },
     },
   }
