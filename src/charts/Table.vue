@@ -79,6 +79,9 @@
             this.showData.push(item);
           }
         }
+        if (this.changedIdx != -1) {
+          this.sortShowData();
+        }
         this.showUnitData = this.showData.slice(0, this.showUnit);
       },
       dataset(newV, _oldV) {
@@ -88,6 +91,9 @@
             this.showData.push(item);
           }
         }
+        if (this.changedIdx != -1) {
+          this.sortShowData();
+        }
         this.showUnitData = this.showData.slice(0, this.showUnit);
       },
       sortStatus: {
@@ -95,12 +101,8 @@
           if (this.changedIdx == -1) {
             // Restore the original order
             this.showData.sort((a, b) => a['index'] - b['index']);
-          } else if (this.sortStatus[this.changedIdx] == 1) {
-            // Ascending
-            this.showData.sort((a, b) => a.values[this.changedIdx - 2] - b.values[this.changedIdx - 2]);
-          } else if (this.sortStatus[this.changedIdx] == -1) {
-            // Descending
-            this.showData.sort((a, b) => b.values[this.changedIdx - 2] - a.values[this.changedIdx - 2]);
+          } else {
+            this.sortShowData();
           }
           this.showUnitData = this.showData.slice(this.pageStart, this.pageEnd);
         },
@@ -125,6 +127,15 @@
         if (value == 0) return '-';
         else if (value == 100) return 100;
         return formatValue(value);
+      },
+      sortShowData() {
+if (this.sortStatus[this.changedIdx] == 1) {
+            // Ascending
+            this.showData.sort((a, b) => a.values[this.changedIdx - 2] - b.values[this.changedIdx - 2]);
+          } else if (this.sortStatus[this.changedIdx] == -1) {
+            // Descending
+            this.showData.sort((a, b) => b.values[this.changedIdx - 2] - a.values[this.changedIdx - 2]);
+          }
       },
       changeSortStatus(idx) {
         if (this.sortStatus[idx] == 0) {
