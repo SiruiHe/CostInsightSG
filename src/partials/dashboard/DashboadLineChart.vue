@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-col col-span-full sm:col-span-6 bg-white dark:bg-gray-800 shadow-xs rounded-xl">
     <header class="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60 flex items-center justify-between">
-      <h2 class="font-semibold text-gray-800 dark:text-gray-100">Consumer Price Index (CPI) By Household Income Group</h2>
+      <div class="flex">
+        <h2 class="font-semibold text-gray-800 dark:text-gray-100">Consumer Price Index (CPI) By Household Income Group</h2>
+        <HelpTip :content="tipContent" :width="9"></HelpTip>
+      </div>
 
       <div class="inline-block relative w-64">
         <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800" v-model="selectedCategory" @change="updateData">
@@ -12,14 +15,14 @@
     </header>
     <!-- Chart built with Chart.js 3 -->
     <!-- Change the height attribute to adjust the chart height -->
-    <LineChart v-if="chartData" :data="chartData" width="600" height="400" />
+    <LineChart v-if="chartData" :data="chartData" width="400" height="300" />
 
   </div>
-  <DescriptionCard :title="selectedCategory" :description="'World!'"></DescriptionCard>
+  <DescriptionCard :title="'Analysis'" :description="analysis"></DescriptionCard>
 </template>
 
 <script>
-  import axios from 'axios';
+  import HelpTip from '../../components/HelpTip.vue';
   import LineChart from '../../charts/LineChart.vue'
   import DescriptionCard from '../../components/DescriptionCard.vue';
 
@@ -29,58 +32,47 @@
   export default {
     name: 'DashboardCard08',
     components: {
-      LineChart,
-      DescriptionCard
+      LineChart, HelpTip, DescriptionCard
     },
     data() {
       return {
         datasets: null,
-        datasetIds: [
-          "d_8f3660871b62f38609915ee7ef45ee2c", // 60
-          "d_36c4af91ffd0a75f6b557960efcb476e", // low 20
-          "d_c5bde9ed17cef8c365629311f8550ce2"  // high 20
-        ],
+        analysis: "",
+        categoryArray: ["All Items", "Food", "Transport", "Recreation & Culture", "Education", "Health Care", "Household Durables & Services", "Miscellaneous Goods & Services", "Communication", "Clothing & Footwear", "Housing & Utilities"],
         labelsArray: [],
-        categoryArray: ["All Items", "Food", "Transport", "Recreation & Culture", "Education", "Health Care", "Household Durables", "Miscellaneous Goods & Services", "Communication", "Clothing & Footwear", "Housing & Utilities"],
-        filteredData: [],
+        filteredData: { "Highest": [], "Lowest": [], "Middle": [] },
         selectedCategory: 'All Items',
+        tipContent: "2019 is the base year",
         chartData: null,
       };
     },
     async created() {
-      await this.fetchDatasets();
-      this.updateData();
+      await this.updateData();
     },
     methods: {
       async fetchDatasets() {
-        const urls = this.datasetIds.map(id => `https://data.gov.sg/api/action/datastore_search?resource_id=${id}`);
+        const category = encodeURIComponent(this.selectedCategory);
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL_1;
 
-        try {
-          this.datasets = await Promise.all(urls.map(url => axios.get(url)));
-        } catch (error) {
-          console.error("Error fetching datasets:", error);
-        }
+        await fetch(`${apiBaseUrl}/cpi?category=${category}`)
+          .then(response => response.json())
+          .then(data => {
+            this.datasets = data.cpi_data;
+            this.analysis = data.analysis;
+          })
+          .catch(error => console.error('Error:', error));
       },
-      updateData() {
-        this.filteredData = [];
+      async updateData() {
+        await this.fetchDatasets();
+        this.filteredData = { "Highest": [], "Lowest": [], "Middle": [] };
         this.labelsArray = [];
-        for (let i = 0; i < this.datasets.length; i++) {
-          let records = this.datasets[i].data.result.records;
-          let categoryObj = records.find(record => { if (record.DataSeries.trim() === this.selectedCategory) return record; });
+        for (let idx in this.datasets) {
+          this.labelsArray.push(this.datasets[idx].year);
 
-          if (categoryObj) {
-            let yearData = [];
-            for (let yearStr in categoryObj) {
-              let year = parseFloat(yearStr);
-              if (!isNaN(year) && !isNaN(categoryObj[year])) {
-                this.labelsArray.push(year.toString());
-                yearData.push(parseFloat(categoryObj[year]));
-              }
-            }
-            this.filteredData.push(yearData);
-          }
+          this.filteredData.Highest.push(this.datasets[idx].Highest);
+          this.filteredData.Middle.push(this.datasets[idx].Middle);
+          this.filteredData.Lowest.push(this.datasets[idx].Lowest);
         }
-        this.labelsArray = Array.from(new Set(this.labelsArray)).sort((a, b) => a - b);
         this.drawChart();
       },
       drawChart() {
@@ -90,7 +82,7 @@
             // Indigo line
             {
               label: 'Middle 60%',
-              data: this.filteredData[0],
+              data: this.filteredData.Middle,
               borderColor: getCssVariable('--color-violet-500'),
               fill: false,
               borderWidth: 2,
@@ -106,7 +98,7 @@
             // Blue line
             {
               label: 'Lowest 20%',
-              data: this.filteredData[1],
+              data: this.filteredData.Lowest,
               borderColor: getCssVariable('--color-sky-500'),
               fill: false,
               borderWidth: 2,
@@ -119,7 +111,7 @@
             // Green line
             {
               label: 'Highest 20%',
-              data: this.filteredData[2],
+              data: this.filteredData.Highest,
               borderColor: getCssVariable('--color-green-500'),
               fill: false,
               borderWidth: 2,
