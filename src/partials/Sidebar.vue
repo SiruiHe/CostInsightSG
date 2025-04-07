@@ -81,18 +81,15 @@
 
         <!-- Ads Section -->
         <div class="px-3 py-2 2xl:block" :class="!sidebarExpanded && !sidebarOpen? 'hidden' : ''">
-          <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-3">
+          <div class="bg-slate-300 dark:bg-slate-700/50 rounded-lg p-3 h-64">
             <div class="flex items-center justify-between mb-2">
               <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Sponsored</h3>
               <span class="text-xs text-slate-400 dark:text-slate-500">Ad</span>
             </div>
             <div class="text-sm text-slate-600 dark:text-slate-300">
-              <p class="font-medium">Ad here</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Anyone wanna put their ads here?</p>
+              <p class="font-medium">Ad from Google Adsense</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">This is a placeholder for ad</p>
             </div>
-            <button class="mt-3 w-full text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">
-              Learn More →
-            </button>
           </div>
         </div>
 

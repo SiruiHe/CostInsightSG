@@ -28,15 +28,27 @@
 
         </div>
 
+        <div class="hidden lg:flex flex-1 justify-center">
+          <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-3 h-16 w-96">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase">Sponsored</h3>
+              <span class="text-xs text-slate-400 dark:text-slate-500">Ad</span>
+            </div>
+            <div class="text-xs text-slate-600 dark:text-slate-300">
+              <p class="font-medium">Ad from Google Adsense</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Header: Right side -->
         <div class="flex items-center space-x-3">
           
           <!-- <Notifications align="right" /> -->
           <Help align="right" />
           <ThemeToggle />
+          
           <!-- Divider -->
           <hr class="w-px h-6 bg-gray-200 dark:bg-gray-700/60 border-none" />
-
 
         </div>
 
