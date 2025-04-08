@@ -23,11 +23,12 @@ import {
   Chart, LineController, LineElement, Filler, PointElement, LinearScale, TimeScale, Tooltip,
 } from 'chart.js'
 import 'chartjs-adapter-moment'
+import annotationPlugin from 'chartjs-plugin-annotation'
 
 // Import utilities
 import { formatValue } from '../utils/Utils'
 
-Chart.register(LineController, LineElement, Filler, PointElement, LinearScale, TimeScale, Tooltip)
+Chart.register(LineController, LineElement, Filler, PointElement, LinearScale, TimeScale, Tooltip, annotationPlugin)
 
 export default {
   name: 'LineChart02',
@@ -99,6 +100,29 @@ export default {
               backgroundColor: darkMode.value ? tooltipBgColor.dark : tooltipBgColor.light,
               borderColor: darkMode.value ? tooltipBorderColor.dark : tooltipBorderColor.light,
             },
+            annotation: {
+              annotations: {
+                line2019: {
+                  type: 'line',
+                  xMin: '2019',
+                  xMax: '2019',
+                  borderColor: darkMode.value ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)',
+                  borderWidth: 1,
+                  borderDash: [5, 5],
+                  label: {
+                    display: true,
+                    content: 'Base Year (2019)',
+                    position: 'end',
+                    yAdjust: 155,
+                    backgroundColor: darkMode.value ? 'rgba(180, 180, 180, 0.7)' : 'rgba(255, 255, 255, 0.7)',
+                    color: darkMode.value ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)',
+                    font: {
+                      size: 12
+                    }
+                  }
+                }
+              }
+            }
           },
           interaction: {
             intersect: false,
@@ -178,6 +202,11 @@ export default {
           chart.options.plugins.tooltip.bodyColor = tooltipBodyColor.dark
           chart.options.plugins.tooltip.backgroundColor = tooltipBgColor.dark
           chart.options.plugins.tooltip.borderColor = tooltipBorderColor.dark
+          
+          // Update annotation colors for dark mode
+          chart.options.plugins.annotation.annotations.line2019.borderColor = 'rgba(255, 255, 255, 0.5)'
+          chart.options.plugins.annotation.annotations.line2019.label.backgroundColor = 'rgba(0, 0, 0, 0.7)'
+          chart.options.plugins.annotation.annotations.line2019.label.color = 'rgba(255, 255, 255, 0.8)'
         } else {
           chart.options.scales.x.ticks.color = textColor.light
           chart.options.scales.y.ticks.color = textColor.light
@@ -185,6 +214,11 @@ export default {
           chart.options.plugins.tooltip.bodyColor = tooltipBodyColor.light
           chart.options.plugins.tooltip.backgroundColor = tooltipBgColor.light
           chart.options.plugins.tooltip.borderColor = tooltipBorderColor.light
+          
+          // Update annotation colors for light mode
+          chart.options.plugins.annotation.annotations.line2019.borderColor = 'rgba(0, 0, 0, 0.5)'
+          chart.options.plugins.annotation.annotations.line2019.label.backgroundColor = 'rgba(255, 255, 255, 0.7)'
+          chart.options.plugins.annotation.annotations.line2019.label.color = 'rgba(0, 0, 0, 0.8)'
         }
         chart.update('none')
       })      

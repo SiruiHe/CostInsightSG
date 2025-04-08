@@ -77,7 +77,7 @@
                       </p>
                     </dt>
                     <dd class="mt-2 ml-16 text-base text-slate-500 dark:text-slate-400">
-                      Detailed insights into historic CPI patterns with interactive charts and reports.
+                      Detailed visualizations into historic CPI patterns with interactive charts.
                     </dd>
                   </div>
 
@@ -90,11 +90,11 @@
                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
-                      <p class="ml-16 text-lg leading-6 font-medium text-slate-800 dark:text-slate-100">Real-time
+                      <p class="ml-16 text-lg leading-6 font-medium text-slate-800 dark:text-slate-100">Latest
                         Tracking</p>
                     </dt>
                     <dd class="mt-2 ml-16 text-base text-slate-500 dark:text-slate-400">
-                      Monitor your expenses in real-time and stay on top of your budget.
+                      Compare with the latest official data and stay on top of your budget.
                     </dd>
                   </div>
 
@@ -113,6 +113,81 @@
                     <dd class="mt-2 ml-16 text-base text-slate-500 dark:text-slate-400">
                       Get AI-powered insights to optimize your spending.
                     </dd>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CPI Explanation Section -->
+          <div class="py-16 bg-white dark:bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="lg:text-center mb-12">
+                <h2 class="text-base text-indigo-600 dark:text-indigo-400 font-semibold tracking-wide uppercase">
+                  Understanding CPI</h2>
+                <p
+                  class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-800 dark:text-slate-100 sm:text-4xl">
+                  What is Consumer Price Index?
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+                <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-8 shadow-sm">
+                  <h3 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">What is CPI?</h3>
+                  <p class="text-slate-600 dark:text-slate-300 mb-4">
+                    The Consumer Price Index (CPI) measures the average change in prices paid by urban consumers for a basket of goods and services over time. It's a key indicator of inflation and reflects how the cost of living changes for households in Singapore.
+                  </p>
+                  <p class="text-slate-600 dark:text-slate-300">
+                    CPI is calculated by tracking price changes for a representative basket of consumer goods and services, including food, housing, transportation, healthcare, and education. The index is published monthly by the Department of Statistics Singapore.
+                  </p>
+                </div>
+
+                <div class="bg-slate-50 dark:bg-slate-800/25 rounded-lg p-8 shadow-sm">
+                  <h3 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">How CPI Helps You?</h3>
+                  <p class="text-slate-600 dark:text-slate-300 mb-4">
+                    Understanding CPI trends can help you make informed financial decisions. By tracking how prices change over time, you can better plan your budget, adjust your spending habits, and make strategic investment choices.
+                  </p>
+                  <p class="text-slate-600 dark:text-slate-300">
+                    Our visualizations breaks down CPI data by income groups, allowing you to see how inflation affects different segments of society. This helps you understand your purchasing power and make adjustments to maintain your standard of living.
+                  </p>
+                </div>
+              </div>
+
+              <div class="mt-12 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-8 shadow-sm">
+                <h3 class="text-xl font-semibold text-indigo-800 dark:text-indigo-300 mb-4">Key Benefits of CPI Knowledge</h3>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                      <svg class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-base font-medium text-slate-800 dark:text-slate-100">Better Budget Planning</p>
+                      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Anticipate price changes with our Machine Learning forecasts and adjust your budget accordingly</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                      <svg class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-base font-medium text-slate-800 dark:text-slate-100">Informed Purchasing</p>
+                      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Know when to buy and which categories are experiencing inflation</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                      <svg class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-base font-medium text-slate-800 dark:text-slate-100">Financial Security</p>
+                      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Protect your purchasing power and maintain your standard of living</p>
+                    </div>
                   </div>
                 </div>
               </div>
