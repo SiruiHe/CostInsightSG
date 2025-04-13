@@ -31,13 +31,23 @@
             </a>
           </li>
           <li>
-            <a href="mailto:e1373772@u.nus.edu" @click="dropdownOpen = false"
+            <a href="mailto:e1373772@u.nus.edu" @click="dropdownOpen = false" 
               class="font-medium text-sm text-violet-500 hover:text-violet-600 dark:hover:text-violet-400 flex items-center py-1 px-3">
               <svg class="w-3 h-3 fill-current text-violet-500 shrink-0 mr-2" viewBox="0 0 12 12">
                 <path
                   d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z" />
               </svg>
               Contact us
+            </a>
+          </li>
+          <li>
+            <a href="https://forms.gle/MNhDsuSUyjiPoGTH8" target="_blank"
+              class="font-medium text-sm text-violet-500 hover:text-violet-600 dark:hover:text-violet-400 flex items-center py-1 px-3">
+              <svg class="w-3 h-3 fill-current text-violet-500 shrink-0 mr-2" viewBox="0 0 12 12">
+                <path
+                  d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z" />
+              </svg>
+              Feedback
             </a>
           </li>
         </ul>
