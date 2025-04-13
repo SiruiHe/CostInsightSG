@@ -58,7 +58,7 @@
           .then(response => response.json())
           .then(data => {
             this.datasets = data.cpi_data;
-            this.analysis = data.analysis;
+            this.analysis = data.analysis + " The vertical dashed line indicates 2019, which is the base year for CPI calculations.";
           })
           .catch(error => console.error('Error:', error));
       },
